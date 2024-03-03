@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} {{t}} {% endblock %}
+{% block content %}
+
+<main class="container">
+    <h1>Expenses Details</h1>
+    <div>
+
+        <h2>ADDEXPENSE</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>categories</th>
+                    <th>Describtion</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in expense %}
+                <tr>
+                    <td>{{ a.categories }}</td>
+                    <td>{{ a.describtion }}</td>
+                    <td>{{ a.amount }}</td>
+                    <td>{{ a.date}}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+
+
+
+</main>
+{% endblock %}

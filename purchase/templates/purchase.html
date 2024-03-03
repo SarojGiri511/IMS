@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{% block title %} {{t}} {% endblock %}
+
+{% block content %}
+              
+<main class="container">
+    <h1>Purchase Report Here</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Vender</th>
+                <th>Number_Of_Items</th>
+                <th>Price_Per_Unit</th>
+                <th>Total</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for a in purchase %}
+            <tr>
+                <td>{{ a.product }}</td>
+                <td>{{ a.vendor }}</td>
+                <td>{{ a.number_of_items }}</td>
+                <td>{{ a.price_per_unit}}</td>
+                <td>{{ a.total}}</td>
+                <td>{{ a.image}}</td>
+                <td>
+                    <a href="" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} {{t}} {% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h1> Vendors Details</h1>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in ventor %}
+                <tr>
+                    <td>{{ a.name}}</td>
+                    <td>{{ a.address}}</td>
+                    <td>{{ a.contact}}</td>
+                    <td>{{ a.email}}</td>
+                    <td>{{ a.action}}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+
+
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+</main>
+{% endblock %}

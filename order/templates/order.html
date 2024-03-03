@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} {{t}} {% endblock %}
+
+{% block content %}
+
+<main class="container">
+
+    <h1>Order Records Here</h1>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Shipping_Address</th>
+                    <th>Status</th>
+                    <th>Note</th>
+                    <th>Instructions</th>
+                    <th>payment_Mode</th>
+                </tr>
+            </thead>
+           
+
+    <tbody>
+        {% for a in order %}
+        <tr>
+            <td>{{ a.customer}}</td>
+            <td>{{ a.shipping_address }}</td>
+            <td>{{ a.status}}</td>
+            <td>{{ a.note}}</td>
+            <td>{{ a.instructions}}</td>
+            <td>{{ a.payment_mode}}</td>
+
+            <td>
+                <a href="" class="btn btn-sm btn-warning">Edit</a>
+                <a href="" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+
+
+
+
+</main>
+
+{% endblock %}

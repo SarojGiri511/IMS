@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} {{t}} {% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h1>Customer Records Here</h1>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Company_Name</th>
+                    <th>Phone_No</th>
+                    <th>Email</th>
+                    <th>Created</th>
+                    <th>Dated</th>
+                    <th>Pan_No</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for a in customer %}
+                <tr>
+                    <td>{{ a.name }}</td>
+                    <td>{{ a.address }}</td>
+                    <td>{{ a.company_name }}</td>
+                    <td>{{ a.phone_no}}</td>
+                    <td>{{ a.email}}</td>
+                    <td>{{ a.created}}</td>
+                    <td>{{ a.updated}}</td>
+                    <td>{{ a.pan_number}}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+
+
+</main>
+
+
+
+
+{% endblock%}

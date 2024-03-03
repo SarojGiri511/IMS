@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock%}
+{% block content %}
+<main class="container">
+        <div class="row">
+  <h1>Product CRUD Operations</h1>
+           
+  <!-- Product Table -->
+  <div>
+    <h2>Products</h2>
+    <table class="table table-responsive table-bordered">
+
+      <form method="post" action="{% url 'product' %}">
+        {% csrf_token %}
+
+
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>SKU</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>MRP</th>
+          <th>Discount</th>
+          <th>Price</th>
+          <th>Thumbnail</th>
+          <th>Added</th>
+          <th>Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          {% if not forms.instance.id %}
+            {% include 'save.html' %}
+          {% endif %}
+        </tr>
+
+
+        {% for product in products %}
+
+        <tr>
+          {% if forms.instance.id == product.id %}
+              {% include 'save.html' %}
+          {% else %}
+
+          <td>{{ product.name }}</td>
+          <td>{{ product.sku }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.mrp }}</td>
+          <td>{{ product.discount }}</td>
+          <td>{{ product.price }}</td>
+
+          {% if not product.thumbnail %}
+            <td> No Image Found </td>
+          {% else %}
+          <td>
+            <img src="{{product.thumbnail.url}}" style="width: 50px;"/>
+          </td>
+          {% endif %}
+          <td>{{ product.added }}</td>
+          <td>{{ product.updated }}</td>
+          <td>
+            <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+            <button formnovalidate onclick=" return confirm('do you want to delete?')" 
+            name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>
+          </td>
+          {% endif%}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </form>
+    </table>
+  </div>
+    </div>
+</main>
+{% endblock%}

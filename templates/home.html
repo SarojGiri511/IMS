@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} {{title}} {% endblock%}
+    {% block content %}
+    <main class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="mt-5">IMS-HOME</h1>
+                <p class="lead">welcome to home page</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Post Title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Post Title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">About Me</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Categories</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Category 1</a></li>
+                            <li class="list-group-item"><a href="#">Category 2</a></li>
+                            <li class="list-group-item"><a href="#">Category 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
