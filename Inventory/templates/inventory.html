@@ -7,31 +7,57 @@
     <h1>Inventory Details</h1>
     <div>
         <table class="table">
+
+            <form action="{% url 'inventory'%}" method="POST">
+                {% csrf_token %}
+
+
             <thead>
                 <tr>
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Items</th>
                     <th>Price</th>
+                    <th>Status</th>
                     <th>Restocked</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    {% if not forms.instance.id %}
+                      {% include 'saveinventory.html' %}
+                    {% endif %}
+                  </tr>
+        
+
+
+
                 {% for a in Inventory %}
                 <tr>
+                    {% if forms.instance.id == a.id %}
+                    {% include 'saveinventory.html' %}
+                {% else %}
+                  
                     <td>{{ a.product }}</td>
                     <td>{{ a.quantity }}</td>
                     <td>{{ a.no_of_items }}</td>
                     <td>{{ a.price }}</td>
+                    <td>{{ a.status }}</td>
                     <td>{{ a.restocked}}</td>
                     <td>
-                        <a href="" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                        <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+            <button formnovalidate onclick=" return confirm('do you want to delete?')" 
+            name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>
                     </td>
+                    {% endif%}
+            </tr>
                 </tr>
                 {% endfor %}
             </tbody>
+
+
+            </form>
 
         </table>
 

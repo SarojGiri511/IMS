@@ -9,4 +9,3 @@ def home(request):
 
 def sign(request):
     return render(request, 'sign.html')
-

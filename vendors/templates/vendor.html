@@ -7,36 +7,59 @@
     <h1> Vendors Details</h1>
     <div>
         <table class="table">
+            <form action="{% url 'vendor'%}" method="POST">
+                {% csrf_token %}
+
+
+
+
+
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Contact</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th>Activities</th>
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
-                {% for a in ventor %}
                 <tr>
+                    {% if not forms.instance.id %}
+                      {% include 'savevendor.html' %}
+                    {% endif %}
+                  </tr>
+        
+                {% for a in vendor %}
+                <tr>
+                    {% if forms.instance.id == a.id %}
+                    {% include 'savevendor.html' %}
+                {% else %}
+                  
+
+
+
+
                     <td>{{ a.name}}</td>
                     <td>{{ a.address}}</td>
                     <td>{{ a.contact}}</td>
                     <td>{{ a.email}}</td>
                     <td>{{ a.action}}</td>
                     <td>
-                        <a href="" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                        <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+            <button formnovalidate onclick=" return confirm('do you want to delete?')" 
+            name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>
                     </td>
 
+                    {% endif%}
 
 
                 </tr>
                 {% endfor %}
 
             </tbody>
+            </form>
         </table>
 
     </div>

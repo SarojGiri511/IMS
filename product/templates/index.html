@@ -10,7 +10,7 @@
     <h2>Products</h2>
     <table class="table table-responsive table-bordered">
 
-      <form method="post" action="{% url 'product' %}">
+      <form method="post" action="{% url 'product' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
 
