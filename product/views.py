@@ -2,12 +2,13 @@ from django.shortcuts import render
 from .models import Product
 from .forms import ProductForm
 
+
 # Create your views here.
 def productHome(request):
     form = ProductForm()
     if request.method == 'POST':
         if 'save' in request.POST:
-            product_add_edit(request)
+            product_add_edit(request)            
         elif 'delete' in request.POST:
             product_delete(request)
         elif 'edit' in request.POST:
@@ -32,6 +33,7 @@ def product_add_edit(request):
         items = ProductForm(request.POST, request.FILES)
     if items.is_valid:
         items.save()
+        
     else:
        return 'Error During Validation'
 
