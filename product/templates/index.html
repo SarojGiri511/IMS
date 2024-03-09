@@ -3,12 +3,11 @@
 {% block content %}
 <main class="container">
         <div class="row">
-  <h1>Product CRUD Operations</h1>
            
   <!-- Product Table -->
-  <div>
+  <div style="overflow-x:auto;">
     <h2>Products</h2>
-    <table class="table table-responsive table-bordered">
+    <table class="table table-responsive">
 
       <form method="post" action="{% url 'product' %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -65,9 +64,9 @@
           <td>{{ product.added }}</td>
           <td>{{ product.updated }}</td>
           <td>
-            <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+            <button formnovalidate name="edit" value="{{product.id}}" class="btn btn-sm btn-warning">Edit</button>
             <button formnovalidate onclick=" return confirm('do you want to delete?')" 
-            name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>
+            name="delete" value="{{product.id}}" class="btn btn-sm btn-danger">Delete</button>
           </td>
           {% endif%}
         </tr>

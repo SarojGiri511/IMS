@@ -3,10 +3,10 @@
 
 {% block content %}
 
-<main class="container">
+<main class="container category">
     <h1>ADD Categories</h1>
 <div>
-    <table class="table">
+    <table class="table ">
 
 <form action="{% url 'category'%}" method="POST">
   {% csrf_token %}

@@ -30,7 +30,7 @@ from order.views import orderHome
 from sales.views import saleshome
 from customer.views import customerhome
 from django.conf import settings
-from django.conf.urls.static import static
+from django.conf.urls.static import static #Static Files
 
 urlpatterns = [
     path('', home, name='home'),
@@ -47,4 +47,4 @@ urlpatterns = [
     path('purchases/', PurchaseDetail, name='purchase'),
     path('admin/', admin.site.urls),
     
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #Static FILES

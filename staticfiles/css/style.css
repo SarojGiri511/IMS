@@ -1,0 +1,17 @@
+section.home h1{
+    color:#F00;
+    
+    
+}
+
+.category h1{
+    font-size: 18px;
+    font-style: italic;
+    padding: 2em;
+    border-bottom: solid 1px #F00;
+    margin-bottom: 5em;
+}
+.table{
+    border: 3px solid blueviolet;
+    
+}

@@ -8,7 +8,7 @@ class customer(models.Model):
     address = models.CharField(max_length=100,null=True)
     company_name = models.CharField(max_length=100,null=True)
     email = models.CharField(max_length=100,null=True)
-    phone_no = models.IntegerField(default=0)
+    phone_no = models.IntegerField(default=0, max_length=15)
     pan_number = models.IntegerField(default=0)
     created = models.DateField(null=True,default=datetime.now)
     updated = models.DateField(null=True,default=datetime.now)

@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
-{% block title %} {{title}} {% endblock%}
-    {% block content %}
-    <main class="container">
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<main class="container">
+    <section class="home">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="mt-5">IMS-HOME</h1>
-                <p class="lead">welcome to home page</p>
+                <h1 class="mt-5 bg-blue"> Inventory Management Software and Systems</h1>
+                <p class="lead text-center">Welcome to the home page</p>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card mb-4">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+                            <img src="{% static '/images/inventory.jpg' %}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Post Title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Read more</a>
+                                <a href="https://www.daraz.com.np/" class="btn btn-primary">Read more</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card mb-4">
-                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="...">
+                            <img src="{% static '/images/inventory.jpg' %}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Post Title</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -48,5 +52,6 @@
                 </div>
             </div>
         </div>
-    </main>
+    </section>
+</main>
 {% endblock %}
