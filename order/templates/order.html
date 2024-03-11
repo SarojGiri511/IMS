@@ -6,43 +6,75 @@
 <main class="container">
 
     <h1>Order Records Here</h1>
-    <div>
+    <div style="overflow:auto;">
         <table class="table">
+
+            <form action="{% url 'order'%}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+
+
             <thead>
                 <tr>
                     <th>Customer</th>
+                    <th>Product</th>
                     <th>Shipping_Address</th>
                     <th>Status</th>
                     <th>Note</th>
                     <th>Instructions</th>
                     <th>payment_Mode</th>
+                    <th>IN_Date</th>
+                    <th>Out_Date</th>
+                    <th>Actions</th>
+
+
                 </tr>
             </thead>
            
 
-    <tbody>
-        {% for a in order %}
+          <tbody>
+
         <tr>
+            {% if not forms.instance.id %}
+              {% include 'saveorder.html' %}
+            {% endif %}
+          </tr>
+
+        {% for a in order %}
+
+        <tr>
+            {% if forms.instance.id == a.id %}
+            {% include 'saveorder.html' %}
+        {% else %}
+
+
             <td>{{ a.customer}}</td>
+            <td>{{ a.product}}</td>
             <td>{{ a.shipping_address }}</td>
             <td>{{ a.status}}</td>
-            <td>{{ a.note}}</td>
+            <td>{{ a.note }}</td>
             <td>{{ a.instructions}}</td>
             <td>{{ a.payment_mode}}</td>
+            <td>{{ a.indate}}</td>
+            <td>{{ a.outdate}}</td>
+
 
             <td>
-                <a href="" class="btn btn-sm btn-warning">Edit</a>
-                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+                        <button formnovalidate onclick=" return confirm('do you want to delete?')" 
+                        name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>
             </td>
+            {% endif%}
         </tr>
         {% endfor %}
     </tbody>
-
+</form>
 </table>
 
 
 
-
+</div>
 
 
 </main>

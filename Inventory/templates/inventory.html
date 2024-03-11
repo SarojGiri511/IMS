@@ -4,8 +4,19 @@
 {% block content %}
 
 <main class="container">
-    <h1>Inventory Details</h1>
-    <div>
+
+
+    <form method="GET" action="{% url 'product' %}">
+        <div class="form-group p-2">
+            <input type="text" name="search" class="form-control" placeholder="Search by name">
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
+        </div>
+    </form>
+  
+
+
+    <h1>The Total List Of Inventory Detail:</h1>
+    <div style="overflow-x:auto;"   >
         <table class="table">
 
             <form action="{% url 'inventory'%}" method="POST">
@@ -15,11 +26,14 @@
             <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Category</th>
+                    <th>Vendor</th>
                     <th>Quantity</th>
-                    <th>Items</th>
                     <th>Price</th>
                     <th>Status</th>
                     <th>Restocked</th>
+                    <th>Location</th>
+                    <th>Expiry</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -40,11 +54,15 @@
                 {% else %}
                   
                     <td>{{ a.product }}</td>
+                    <td>{{ a.category }}</td>
+                    <td>{{ a.vendor }}</td>
                     <td>{{ a.quantity }}</td>
-                    <td>{{ a.no_of_items }}</td>
                     <td>{{ a.price }}</td>
                     <td>{{ a.status }}</td>
                     <td>{{ a.restocked}}</td>
+                    <td>{{ a.location }}</td>
+                    <td>{{ a.expiry }}</td>
+
                     <td>
                         <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
             <button formnovalidate onclick=" return confirm('do you want to delete?')" 

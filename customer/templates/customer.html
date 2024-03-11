@@ -5,45 +5,67 @@
 
 <main class="container">
     <h1>Customer Records Here</h1>
-    <div>
+    <div style="overflow-x:auto;"   >
         <table class="table">
+
+            <form action="{% url 'customer'%}" method="POST">
+                {% csrf_token %}
+              
+
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Company_Name</th>
-                    <th>Phone_No</th>
                     <th>Email</th>
-                    <th>Created</th>
-                    <th>Dated</th>
-                    <th>Pan_No</th>
+                    <th>Phone_No</th>
+                    <th>Pan Number</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
 
             <tbody>
+                <tr>
+                    {% if not forms.instance.id %}
+                      {% include 'savecustomer.html' %}
+                    {% endif %}
+                  </tr>
+        
+
+
+
                 {% for a in customer %}
                 <tr>
+                    {% if forms.instance.id == a.id %}
+                    {% include 'savecustomer.html' %}
+                {% else %}
+
+
+
                     <td>{{ a.name }}</td>
                     <td>{{ a.address }}</td>
                     <td>{{ a.company_name }}</td>
-                    <td>{{ a.phone_no}}</td>
                     <td>{{ a.email}}</td>
-                    <td>{{ a.created}}</td>
-                    <td>{{ a.updated}}</td>
+                    <td>{{ a.phone_no}}</td>
                     <td>{{ a.pan_number}}</td>
+                    <td>{{ a.date}}</td>
+                                 
                     <td>
-                        <a href="" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                        <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
+                        <button formnovalidate onclick=" return confirm('do you want to delete?')" 
+                        name="delete" value="{{a.id}}" class="btn btn-sm btn-danger">Delete</button>>
                     </td>
+          {% endif%}
+
                 </tr>
                 {% endfor %}
             </tbody>
-
+        </form>
         </table>
 
 
-
+    </div>
 </main>
 
 

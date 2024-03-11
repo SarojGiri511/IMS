@@ -6,7 +6,14 @@
            
   <!-- Product Table -->
   <div style="overflow-x:auto;">
-    <h2>Products</h2>
+
+    <form method="GET" action="{% url 'product' %}">
+      <div class="form-group p-2">
+          <input type="text" name="search" class="form-control" placeholder="Search by name">
+          <button type="submit" class="btn btn-primary mt-2">Search</button>
+      </div>
+  </form>
+    <h2>Product Table:</h2>
     <table class="table table-responsive">
 
       <form method="post" action="{% url 'product' %}" enctype="multipart/form-data">
@@ -21,8 +28,6 @@
           <th>Category</th>
           <th>Quantity</th>
           <th>MRP</th>
-          <th>Discount</th>
-          <th>Price</th>
           <th>Thumbnail</th>
           <th>Added</th>
           <th>Updated</th>
@@ -51,8 +56,6 @@
           <td>{{ product.category }}</td>
           <td>{{ product.quantity }}</td>
           <td>{{ product.mrp }}</td>
-          <td>{{ product.discount }}</td>
-          <td>{{ product.price }}</td>
 
           {% if not product.thumbnail %}
             <td> No Image Found </td>

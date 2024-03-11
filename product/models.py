@@ -12,8 +12,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True) # Foreign Key link
     quantity = models.IntegerField(default=0)
     mrp = models.CharField(max_length=50, default=0)
-    discount = models.CharField(max_length=50, default=0)
-    price = models.CharField(max_length=50, default=0)
     thumbnail = models.ImageField(null=True, blank=True, upload_to='products/')
     added = models.DateField(null = True, default=datetime.now)
     updated = models.DateField(null = True, default=datetime.now)

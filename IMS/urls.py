@@ -21,10 +21,10 @@ from .views import sign
 
 
 from product.views import productHome, ProductDetail
-from purchase.views import PurchaseDetail
+from purchase.views import purchaseHome
 from Inventory.views import InventoryHome
 from vendors.views import vendorHome
-from addexpense.views import expenseHome
+from expense.views import expenseHome
 from Category.views import  CategoryHome
 from order.views import orderHome
 from sales.views import saleshome
@@ -44,7 +44,7 @@ urlpatterns = [
     path('sales/',saleshome,name='sales'),
     path('customer/',customerhome,name='customer'),
     path('products/detail/', ProductDetail, name='productDetail'),
-    path('purchases/', PurchaseDetail, name='purchase'),
+    path('purchases/', purchaseHome, name='purchase'),
     path('admin/', admin.site.urls),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #Static FILES

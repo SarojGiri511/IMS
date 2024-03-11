@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'sales',
     'vendors',
     'purchase',
-    'addexpense',
+    'expense',
     'order',
 ]
 
@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'inventory',
         'USER':'root',
-        'PASSWORD': '',
+        'PASSWORD':'',
         'HOST':'localhost',
         'PORT':'3306',
     }
