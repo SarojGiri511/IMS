@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block title %} {{t}} {% endblock %}
-
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+{% endblock styles %}
 {% block content %}
 
 <main class="container">
     <h1> Vendors Details</h1>
-    <div>
-        <table class="table">
-            <form action="{% url 'vendor'%}" method="POST">
-                {% csrf_token %}
+    <divstyle="overflow-x:auto;">
+        <a href="{% url 'vendor.add' %}" class="btn btn-primary mt-2">Add New Vendor</a>
+        <form action="{% url 'vendor'%}" method="POST">
+            {% csrf_token %}
 
+            <table class="table" id="example">
+    
 
 
 
@@ -25,15 +29,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    {% if not forms.instance.id %}
-                      {% include 'savevendor.html' %}
-                    {% endif %}
-                  </tr>
         
-                {% for a in vendor %}
+                {% for a in Vendor %}
                 <tr>
-                    {% if forms.instance.id == a.id %}
+                {% if forms.instance.id == a.id %}
                     {% include 'savevendor.html' %}
                 {% else %}
                   
@@ -59,9 +58,16 @@
                 {% endfor %}
 
             </tbody>
-            </form>
+         
         </table>
-
+        </form> 
     </div>
 </main>
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script>
+    var table = new DataTable('#example');
+</script>
 {% endblock %}

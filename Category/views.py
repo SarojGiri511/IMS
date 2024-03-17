@@ -41,3 +41,12 @@ def CategoryHome(request):
 
     }
     return render(request,'categories.html',context)
+
+def CategoryAdd(request):
+ 
+    context = {
+        'submit_url':'Category',
+        'forms':  CategoryForm(), 
+    }
+    return render(request, 'add_new.html', context)
+

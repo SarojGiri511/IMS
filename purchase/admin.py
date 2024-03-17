@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import purchase
+from .models import Purchase
 
 
-class purchaseAdmin(admin.ModelAdmin):
+class PurchaseAdmin(admin.ModelAdmin):
     list_display = ('product','vendor','price','items','total','image')
 
 # Register your models here.
-admin.site.register(purchase, purchaseAdmin)
+admin.site.register(Purchase, PurchaseAdmin)

@@ -1,9 +1,9 @@
 from django import forms
-from .models import vendors
+from .models import Vendors
 
-class vendorsForm(forms.ModelForm):
+class VendorsForm(forms.ModelForm):
 
     class Meta:
-        model = vendors
+        model = Vendors
 
         fields = '__all__' #All Fields

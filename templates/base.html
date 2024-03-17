@@ -1,46 +1,31 @@
-{% load static %}
+{%load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>IMS - {% block title %}   {% endblock %} </title>
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMS - {% block title %} {% endblock %} </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0" rel="stylesheet"/>
-    
-   
     <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
-    <!-- Custom styles for this template -->
-    {% block styles %}   {% endblock %}
-    <style>
-        .navbar-nav .nav-link:hover {
-            color: white !important;
-        }
-    </style>
-
+    {% block styles %} {% endblock %}
 </head>
+<body class="d-flex flex-column min-vh-100">
 
-<body>
-
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}"> <img class="img" src="{% static '/images/logo.jpg' %}"/>   </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'product' %}">Product</a>
-                        </li>
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static '/images/logo.jpg' %}" alt="Logo" class="img"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product' %}">Products</a>
+                    </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
                         </li>
@@ -65,33 +50,89 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'order' %}">Order</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sign' %}">sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link bg-danger"  href="{% url 'admin:login' %}"><i class="ri-admin-line"></i>Admin Login</a>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://th.bing.com/th/id/OIP.s3RJ4bcuEf9d2BBzCCB_0wHaHa?rs=1&pid=ImgDetMain" alt="User Image" width="30" height="30" style="border-radius: 50%;">
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'admin_logout' %}">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin_login' %}">Sign In</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer mt-auto py-4 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'product' %}">Product</a></li>
+                        <li><a href="{% url 'inventory' %}">Inventory</a></li>
+                        <li><a href="{% url 'vendor' %}">Vendors</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'expense' %}">Expenses</a></li>
+                        <li><a href="{% url 'category' %}">Categories</a></li>
+                        <li><a href="{% url 'customer' %}">Customers</a></li>
+                        <li><a href="{% url 'purchase' %}">Purchase</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="{% url 'sales' %}">Sales</a></li>
+                        <li><a href="{% url 'order' %}">Order</a></li>
+                        <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+                        <li><a href="{% url 'admin_logout' %}">Admin Logout</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled footer-contact">
+                        <li><strong>Phone:</strong> +1234567890</li>
+                        <li><strong>Email:</strong> info@example.com</li>
+                        <li><strong>Address:</strong> 123 Street, City, Country</li>
+                        <!-- You can embed Google Maps here -->
+                        <li><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3936.000369793686!2d85.32066431459424!3d27.717245732854683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19c0f99349b5%3A0xf542f1b15c35ca4d!2sNepal!5e0!3m2!1sen!2sus!4v1646762749051!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    {% block content %}
-
-    {% endblock %}
-
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <span class="text-muted">© 2024 My Blog</span>
         </div>
     </footer>
-
-    <!-- Bootstrap Bundle with Popper -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'scripts/script.js'  %}"></script>
-    {% block script %}
-
-    {% endblock %}
-</body>
-</html>
+    <script>
+        // Enable Bootstrap 5 dropdowns
+        var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+        var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+            return new bootstrap.Dropdown(dropdownToggleEl)
+        });
+    </script>
+    {% block script %} {% endblock %}
+    </body>
+    </html>

@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import vendors
+from .models import Vendors
 
-class vendorsAdmin(admin.ModelAdmin):
+class VendorsAdmin(admin.ModelAdmin):
     list_display = ('name','address','contact','email','action')
 
 # Register your models here.
-admin.site.register(vendors, vendorsAdmin)
+admin.site.register(Vendors, VendorsAdmin)
 
 

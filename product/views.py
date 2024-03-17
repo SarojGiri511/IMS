@@ -3,32 +3,33 @@ from .models import Product
 from .forms import ProductForm
 
 
+
 # Create your views here.
-def productHome(request):
+def ProductHome(request):
     form = ProductForm()
     if request.method == 'POST':
         if 'save' in request.POST:
-            product_add_edit(request)            
+            Product_add_edit(request)            
         elif 'delete' in request.POST:
-            product_delete(request)
+            Product_delete(request)
         elif 'edit' in request.POST:
-            form = product_edit(request)
+            form = Product_edit(request)
 
     context = {
         'forms': form,
         'title':'Products',
-        'products':Product.objects.all().order_by('-id') #TO get all data from product table latest first
+        'Products':Product.objects.all().order_by('-id') #TO get all data from product table latest first
        
     }
     
     return render(request,'index.html', context)
 
 
-def product_add_edit(request):
+def Product_add_edit(request):
     if request.POST.get('save'):
         pk = request.POST.get('save')
         item = Product.objects.get(id=pk)
-        items = ProductForm(request.POST, request.files, instance=item)
+        items = ProductForm(request.POST, request.FILES, instance=item)
     else: 
         items = ProductForm(request.POST, request.FILES)
     if items.is_valid:
@@ -38,13 +39,13 @@ def product_add_edit(request):
        return 'Error During Validation'
 
 
-def product_delete(request):
+def Product_delete(request):
     pk = request.POST.get('delete')
     item = Product.objects.filter(id=pk)
     item.delete()
 
 
-def product_edit(request):
+def Product_edit(request):
     pk = request.POST.get('edit')
     item = Product.objects.get(id=pk)
     return ProductForm(instance=item)   
@@ -53,3 +54,11 @@ def product_edit(request):
 
 def ProductDetail(request):
     return render(request, 'detail.html')
+
+def ProductAdd(request):
+ 
+    context = {
+        'submit_url':'product',
+        'forms':  ProductForm(), 
+    }
+    return render(request, 'add_new.html', context)

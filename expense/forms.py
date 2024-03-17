@@ -1,9 +1,9 @@
 from django import forms
-from .models import expense
+from .models import Expense
 
 
-class expenseForm(forms.ModelForm):
+class ExpenseForm(forms.ModelForm):
 
     class Meta:
-        model = expense
+        model = Expense
         fields = '__all__' #All Fields

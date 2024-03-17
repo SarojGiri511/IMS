@@ -1,13 +1,15 @@
 from typing import Any
 from django.db import models
-from datetime import datetime
+
 
 
 # Create your models here.
-class vendors(models.Model):
+class Vendors(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
-    contact = models.PositiveBigIntegerField(default=0)
-    email = models.CharField(max_length=50)
+    contact = models.PositiveBigIntegerField(max_length=15)
+    email = models.EmailField(blank=True, null=True)
     action = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
     

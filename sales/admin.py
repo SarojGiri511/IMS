@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import sales  # Assuming your model is named 'Sales', not 'sales'
+from .models import Sales  # Assuming your model is named 'Sales', not Ssales'
 
-class salesAdmin(admin.ModelAdmin):
+class SalesAdmin(admin.ModelAdmin):
     list_display = ('customer', 'product', 'quantity', 'rate', 'total', 'cost', 'discount', 'gtotal', 'date')
     search_fields = ['name']
 
 # Register your model with the custom admin class
-admin.site.register(sales, salesAdmin)
+admin.site.register(Sales, SalesAdmin)
 
 

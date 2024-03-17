@@ -1,6 +1,8 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block title %} {{t}} {% endblock %}
-
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+{% endblock styles %}
 {% block content %}
               
 <main class="container">
@@ -8,11 +10,13 @@
 
 
     <div style=overflow-x:auto;>
-       <table class="table">
+      <a href="{% url 'purchase.add' %}" class="btn btn-primary mt-2">Add New Purchase</a>
 
-              <form action="{% url 'purchase'%}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+        {% csrf_token %}
 
+        <table class="table" id="example">
+
+             
 
             <thead>
               <tr>
@@ -39,7 +43,7 @@
 
 
 
-            {% for a in purchases %}
+            {% for a in Vender %}
             <tr>
                 {% if forms.instance.id == a.id %}
                 {% include 'savepurchase.html' %}
@@ -80,9 +84,17 @@
             </tr>
             {% endfor %}
            </tbody>
-           </form>
+         
         </table>
+      </form>
     </div>
 
 </main>
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script>
+    var table = new DataTable('#example');
+</script>
 {% endblock %}

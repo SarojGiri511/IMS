@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
-{% block title %} {{title}} {% endblock%}
+{% block title %} {{t}} {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+{% endblock styles %}
 {% block content %}
 <main class="container">
         <div class="row">
            
   <!-- Product Table -->
   <div style="overflow-x:auto;">
-
-    <form method="GET" action="{% url 'product' %}">
-      <div class="form-group p-2">
-          <input type="text" name="search" class="form-control" placeholder="Search by name">
-          <button type="submit" class="btn btn-primary mt-2">Search</button>
-      </div>
-  </form>
+    <a href="{% url 'product.add' %}" class="btn btn-primary mt-2">Add New Product</a>
     <h2>Product Table:</h2>
-    <table class="table table-responsive">
+    <form action="{% url 'product'%}" method="POST">
+      {% csrf_token %}
+      <table class="table" id="example">
 
-      <form method="post" action="{% url 'product' %}" enctype="multipart/form-data">
-        {% csrf_token %}
+   
 
 
       <thead>
@@ -43,7 +41,7 @@
         </tr>
 
 
-        {% for product in products %}
+        {% for product in Products %}
 
         <tr>
           {% if forms.instance.id == product.id %}
@@ -75,9 +73,16 @@
         </tr>
         {% endfor %}
       </tbody>
-    </form>
     </table>
+  </form>
   </div>
     </div>
 </main>
-{% endblock%}
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script>
+    var table = new DataTable('#example');
+</script>
+{% endblock %}

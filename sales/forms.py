@@ -1,9 +1,9 @@
 from django import forms
-from sales.models import sales
+from Sales.models import Sales
 
 
-class salesForm(forms.ModelForm):
+class SalesForm(forms.ModelForm):
 
     class Meta:
-        model = sales
+        model = Sales
         fields = '__all__' #All Field

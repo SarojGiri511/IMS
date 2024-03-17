@@ -1,54 +1,38 @@
 {% extends 'base.html' %}
 {% block title %} {{t}} {% endblock %}
-
+{% block styles %}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+{% endblock styles %}
 {% block content %}
 
+
 <main class="container">
-
+    <a href="{% url 'order.add' %}" class="btn btn-primary mt-2">Add New Order</a>
     <h1>Order Records Here</h1>
-    <div style="overflow:auto;">
-        <table class="table">
+    <form action="{% url 'product'%}" method="POST">
+       {% csrf_token %}
 
-            <form action="{% url 'order'%}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-
-
-
-
-            <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Product</th>
-                    <th>Shipping_Address</th>
-                    <th>Status</th>
-                    <th>Note</th>
-                    <th>Instructions</th>
-                    <th>payment_Mode</th>
-                    <th>IN_Date</th>
-                    <th>Out_Date</th>
-                    <th>Actions</th>
-
-
-                </tr>
-            </thead>
-           
-
-          <tbody>
-
-        <tr>
-            {% if not forms.instance.id %}
-              {% include 'saveorder.html' %}
-            {% endif %}
-          </tr>
-
+    <table class="table table-responsive " id="example">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Shipping_Address</th>
+                <th>Status</th>
+                <th>Note</th>
+                <th>Instructions</th>
+                <th>payment_Mode</th>
+                <th>IN_Date</th>
+                <th>Out_Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for a in order %}
-
         <tr>
             {% if forms.instance.id == a.id %}
             {% include 'saveorder.html' %}
         {% else %}
-
-
             <td>{{ a.customer}}</td>
             <td>{{ a.product}}</td>
             <td>{{ a.shipping_address }}</td>
@@ -58,8 +42,6 @@
             <td>{{ a.payment_mode}}</td>
             <td>{{ a.indate}}</td>
             <td>{{ a.outdate}}</td>
-
-
             <td>
                 <button formnovalidate name="edit" value="{{a.id}}" class="btn btn-sm btn-warning">Edit</button>
                         <button formnovalidate onclick=" return confirm('do you want to delete?')" 
@@ -69,14 +51,14 @@
         </tr>
         {% endfor %}
     </tbody>
-</form>
 </table>
-
-
-
-</div>
-
-
+</form>
 </main>
-
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+<script>
+    var table = new DataTable('#example');
+</script>
 {% endblock %}

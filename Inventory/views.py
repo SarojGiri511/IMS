@@ -8,7 +8,7 @@ from .forms import InventoryForm
 # Create your views here.
 def InventoryHome(request):
     form = InventoryForm()
-
+    message = 'success'
     if request.method == 'POST':
         if 'save' in request.POST:
            
@@ -18,7 +18,10 @@ def InventoryHome(request):
                 items = InventoryForm(request.POST,instance=item)
             else: 
                 items = InventoryForm(request.POST)
-            items.save()
+            if items.is_valid:
+                items.save()
+            else:
+                message =  'Error During Validation'
 
         elif 'delete' in request.POST:
             pk = request.POST.get('delete')
@@ -34,7 +37,16 @@ def InventoryHome(request):
     context ={
         'forms': form, 
         't':'Inventory management',
-        'Inventory':Inventory.objects.all()
+        'Inventory':Inventory.objects.all(),
+        'message':message
 
     }
     return render(request, 'inventory.html',context)
+
+def InventoryAdd(request):
+ 
+    context = {
+        'submit_url':'inventory',
+        'forms': InventoryForm(), 
+    }
+    return render(request, 'add_new.html', context)

@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body class="add-new">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}"> <img class="img" src=""/>Logo Here   </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'product' %}">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory' %}">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vendor' %}">Vendors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'expense' %}">Expenses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'category' %}">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'customer' %}">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'purchase' %}">Purchase</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sales' %}">Sales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'order' %}">Order</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link bg-danger"  href="{% url 'admin:login' %}"><i class="ri-admin-line"></i>Admin Dashboard</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sign' %}">sign up</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="center-box">
+        <div class="center-box-content ">
+            <h2>Add New</h2>
+            <form method="POST" action="{% url submit_url %}">
+            {% csrf_token %}
+            {% for form in forms %}
+            <div class="mb-3">
+                <label for="{{ form.field.id_for_label }}" class="form-label">{{ form.label }}</label>
+                {{ form }}
+            </div>
+            {% endfor %}
+            <button name="save" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+    </section>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">© 2024 My Blog</span>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

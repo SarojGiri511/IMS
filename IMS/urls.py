@@ -20,31 +20,58 @@ from .views import home
 from .views import sign
 
 
-from product.views import productHome, ProductDetail
-from purchase.views import purchaseHome
-from Inventory.views import InventoryHome
-from vendors.views import vendorHome
-from expense.views import expenseHome
-from Category.views import  CategoryHome
-from order.views import orderHome
-from sales.views import saleshome
-from customer.views import customerhome
+from Product.views import ProductHome, ProductDetail
+from Product.views import ProductAdd
+
+from Purchase.views import PurchaseHome, PurchaseAdd
+from Inventory.views import InventoryHome, InventoryAdd
+from Vendors.views import VendorHome, VendorAdd
+from Expense.views import ExpenseHome, ExpenseAdd
+from Category.views import  CategoryHome, CategoryAdd
+from Order.views import OrderHome, OrderAdd
+from Sales.views import Saleshome, SalesAdd
+from Customer.views import Customerhome, CustomerAdd
 from django.conf import settings
 from django.conf.urls.static import static #Static Files
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('', home, name='home'),
     path('IMS/', sign, name='sign'),
-    path('products/', productHome, name='product'),
+    path('products/', ProductHome, name='product'),
+    path('product/add/', ProductAdd, name='product.add'),
     path('inventory/', InventoryHome, name='inventory'),
-    path('vendors/', vendorHome, name='vendor'),
-    path('expense/', expenseHome, name='expense'),
+    path('inventory/add/', InventoryAdd, name='inventory.add'),
+    path('vendors/', VendorHome, name='vendor'),
+
+    path('vendors/add/', VendorAdd, name='vendor.add'),
+
+    path('expense/', ExpenseHome, name='expense'),
+    path('expense/add/', ExpenseAdd, name='expense.add'),
+
     path('category/', CategoryHome, name='category'),
-    path('order/',orderHome,name='order'),
-    path('sales/',saleshome,name='sales'),
-    path('customer/',customerhome,name='customer'),
-    path('products/detail/', ProductDetail, name='productDetail'),
-    path('purchases/', purchaseHome, name='purchase'),
+    path('category/add/', CategoryAdd, name='category.add'),
+
+    path('order/',OrderHome,name='order'),
+    path('order/add/',OrderAdd,name='order.add'),
+
+    path('sales/',Saleshome,name='sales'),
+    path('sales/add/',SalesAdd,name='sales.add'),
+
+    path('customer/',Customerhome,name='customer'),
+    path('customer/add/',CustomerAdd,name='customer.add'),
+
+    path('products/detail/', ProductDetail, name='roductDetail'),
+    path('purchases/', PurchaseHome, name='purchase'),
+    path('purchases/add/', PurchaseAdd, name='purchase.add'),
+
     path('admin/', admin.site.urls),
+    path('admin/logout/', auth_views.LogoutView.as_view(), name='admin_logout'),
+    path('admin/login/', auth_views.LoginView.as_view(), name='admin_login'),
+
+
+
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #Static FILES

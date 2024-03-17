@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Any
 
 # Create your models here.
-class customer(models.Model):
+class Customer(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100,null=True)
     company_name = models.CharField(max_length=100,null=True)

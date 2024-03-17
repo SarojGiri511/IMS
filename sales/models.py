@@ -1,10 +1,13 @@
 from django.db import models
 from datetime import datetime
+from Product.models import Product
+from Customer.models import Customer
 
 
-class sales(models.Model):
-    customer = models.CharField(max_length=50, null=True)
-    product = models.CharField(max_length=50, null=True)
+
+class Sales(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(default=0)
     rate = models.IntegerField(default=0)
     cost = models.IntegerField(default=0)
